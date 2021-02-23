@@ -54,7 +54,7 @@ module.exports = Service.extend ({
 
   // get a single rental
   get (id) {
-    console.log("this._rentals.find(): " + id);
+    //console.log("this._rentals.find(): " + id);
     return this._rentals.find (rental => rental.id === id);
   },
 
@@ -76,7 +76,7 @@ module.exports = Service.extend ({
 
   update(rental){
     //let index = this._rentals.findIndex (rental => rental.id === id);
-    console.log("rental => " + rental);
+    //console.log("rental => " + rental);
     console.log(rental);
     //UPDATE - 
 

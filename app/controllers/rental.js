@@ -13,7 +13,7 @@ module.exports = ResourceController.extend ({
   get(){
     return Action.extend({
       execute(req, res){
-        console.log(":(");
+        //console.log(":(");
         //res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "*");
         res.header("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -68,7 +68,7 @@ module.exports = ResourceController.extend ({
         res.header("Access-Control-Allow-Methods", "*");
         res.header("Access-Control-Allow-Origin", "http://localhost:4200");
         //const rental = req.body;
-        console.log('update');
+        //console.log('update');
         const { rental } = req.body;
         console.log(req.params);
         this.controller.rentals.update(rental);

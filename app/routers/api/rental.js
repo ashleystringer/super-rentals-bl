@@ -4,6 +4,7 @@ module.exports = Router.extend({
     specification: {
         '/rentals':{
             post: {action: 'rental@create'},
+            options: {action: 'rental@option'},
             get: {action: 'rental@get'},
             '/:rentalId': {
                 get: {action: 'rental@getOne'},
