@@ -43,10 +43,13 @@ module.exports = ResourceController.extend ({
   delete () {
     return Action.extend ({
       execute (req, res) {
+        res.header("Access-Control-Allow-Methods", "*");
+        res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+        console.log('Testing delete');
         const { rentalId } = req.params;
         const result = this.controller.rentals.remove (rentalId);
-
-        res.status (200).json (result);
+        console.log("result " + result);
+        res.status (200).json ({data: [result]});
       }
     });
   },
