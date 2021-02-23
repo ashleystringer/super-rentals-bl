@@ -1,90 +1,87 @@
 const {
-  Controller,
-  Action
+  ResourceController,
+  Action,
+  service
 } = require ('@onehilltech/blueprint');
 
 /**
  * @class rental
  */
-module.exports = Controller.extend ({
+module.exports = ResourceController.extend ({
+  name: 'rental',
+  rentals: service(),
   get(){
     return Action.extend({
       execute(req, res){
         console.log(":(");
         //res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Origin", "*");
-        res.status(200).json({
-          data:[
-            {
-              type: 'rentals',
-              id: 'grand-old-mansion',
-              attributes: {
-              title: 'Grand Old Mansion',
-              owner: 'Veruca Salt',
-              city: 'San Francisco',
-              category: 'Estate',
-              bedrooms: 15,
-              image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg'
-              }
-            },
-            {
-              type: 'rentals',
-              id: 'urban-living',
-              attributes: {
-              title: 'Urban Living',
-              owner: 'Mike Teavee',
-              city: 'Seattle',
-              category: 'Condo',
-              bedrooms: 1,
-              image: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Alfonso_13_Highrise_Tegucigalpa.jpg'
-              }
-            },
-            {
-              type: 'rentals',
-              id: 'downtown-charm',
-              attributes: {
-              title: 'Downtown Charm',
-              owner: 'Violet Beauregarde',
-              city: 'Portland',
-              category: 'Apartment',
-              bedrooms: 3,
-              image: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg'
-              }
-            }
-          ]
-        });
+        res.header("Access-Control-Allow-Methods", "*");
+        res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+        const data = this.controller.rentals.rentals;
+        res.status(200).json({data});
       }
     });
   },
-  get1(){
-    return Action.extend({
-      execute(req, res){
-        console.log("??????");
-        res.header("Access-Control-Allow-Origin", "*"); //?
-        res.status(200).json({
-          data:
-            {
-              type: 'rentals',
-              id: 'grand-old-mansion',
-              attributes: {
-              title: 'Grand Old Mansion',
-              owner: 'Veruca Salt',
-              city: 'San Francisco',
-              category: 'Estate',
-              bedrooms: 15,
-              image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg'
-              }
-            }
-        });
+  getOne(){
+    return Action.extend ({
+      execute (req, res) {
+        res.header("Access-Control-Allow-Methods", "*");
+        res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+        const { rentalId } = req.params;
+        console.log(req.params);
+        const rental = this.controller.rentals.get (rentalId);
+        console.log(typeof rental);
+        if (rental) {
+          res.status (200).json ({ data: rental }); //data: [rental]
+        }
+        else {
+          res.sendStatus (404);
+        }
+      }
+    })
+  },
+  delete () {
+    return Action.extend ({
+      execute (req, res) {
+        const { rentalId } = req.params;
+        const result = this.controller.rentals.remove (rentalId);
+
+        res.status (200).json (result);
       }
     });
   },
-  test(){
+  create () {
+    return Action.extend ({
+      execute (req, res) {
+        res.header("Access-Control-Allow-Methods", "*");
+        res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+        const { rental } = req.body;
+        this.controller.rentals.add (rental);
+  
+        res.status (200).json ({data: [rental]});
+      }
+    })
+  },
+  update(){
     return Action.extend({
       execute(req, res){
-        console.log("Testing test() method :)");
-        res.header("Access-Control-Allow-Origin", "*"); //?
-        console.log("test()");
+        res.header("Access-Control-Allow-Methods", "*");
+        res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+        //const rental = req.body;
+        console.log('update');
+        const { rental } = req.body;
+        console.log(req.params);
+        this.controller.rentals.update(rental);
+        res.status(200);
+      }
+    });
+  },
+  option(){
+    return Action.extend({
+      execute(req, res){
+        res.header("Access-Control-Allow-Methods", "*");
+        res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+        res.header("Access-Control-Allow-Headers", "content-type");
       }
     });
   }

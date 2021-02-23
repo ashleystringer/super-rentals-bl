@@ -2,15 +2,16 @@ const {Router} = require('@onehilltech/blueprint');
 
 module.exports = Router.extend({
     specification: {
-        '/rentals/':{
-            get: {action: 'rental@get'}
-        },
-        '/rentals/grand-old-mansion':{
-            get: {action: 'rental@get1'},
-            put: {action: 'rental@test'}
+        '/rentals':{
+            post: {action: 'rental@create'},
+            get: {action: 'rental@get'},
+            '/:rentalId': {
+                get: {action: 'rental@getOne'},
+                delete: {action: 'rental@delete'},
+                put: {action: 'rental@update'},
+                patch: {action: 'rental@update'},
+                options: {action: 'rental@option'}
+            }
         }
-        /*'/rentals/grand-old-mansion':{
-            put: {action: 'rental@get'}
-        }*/
     }
 });
