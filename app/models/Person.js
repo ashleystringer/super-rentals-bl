@@ -9,4 +9,4 @@ const schema = mongodb.Schema ({
   last_name : {type: String, required: true, trim: true}
 });
 
-//module.exports = mongodb.models ('person', schema, 'blueprint_people');
+module.exports = mongodb.resource ('person', schema, 'blueprint_people');
