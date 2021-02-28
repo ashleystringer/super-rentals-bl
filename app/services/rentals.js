@@ -50,6 +50,7 @@ module.exports = Service.extend ({
           image: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Wheeldon_Apartment_Building_-_Portland_Oregon.jpg'
         }
       }];
+      //console.log(this._rentals);   
   },
 
   // get a single rental
@@ -60,6 +61,7 @@ module.exports = Service.extend ({
 
   // add a rental to the list.
   add (rental) {
+    //console.log(this._rentals);   
     return this._rentals.push (rental);
   },
 
