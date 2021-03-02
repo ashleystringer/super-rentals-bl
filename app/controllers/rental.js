@@ -28,6 +28,7 @@ module.exports = ResourceController.extend ({
         res.header("Access-Control-Allow-Methods", "*");
         res.header("Access-Control-Allow-Origin", "http://localhost:4200");
         const data = this.controller.rentals.rentals;
+        //const data = this.controller.Rental.getAll();
         res.status(200).json({data});
       }
     });

@@ -2,16 +2,12 @@ const { BO } = require ('@onehilltech/blueprint');
 const mongodb = require('@onehilltech/blueprint-mongodb');
 const { Schema } = mongodb;
 
-const schema = mongodb.Schema({
-  type: {type: String, required: true},
-  title: {type: String, required: true},
-  owner: {type: String, required: true},
-  city: {type: String, required: true},
-  category: {type: String, required: true},
-  bedrooms: {type: String, required: true},
-  image: {type: String, required: true}
+const schema = mongodb.Schema ({
+  first_name: {type: String, required: true, trim: true},
+  last_name : {type: String, required: true, trim: true}
 });
 
+module.exports = mongodb.resource ('rental', schema, 'blueprint_rentals');
 //module.exports = mongodb.models('rental', schema, 'blueprint_rental');
 /*module.exports = BO.extend ({
     id: null,              // message id//
